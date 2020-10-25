@@ -3,21 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/splashFragment">
-    <fragment
-        android:id="@+id/splashFragment"
-        android:name="com.pamarcolino.sofie.view.fragments.SplashFragment"
-        android:label="splash_fragment"
-        tools:layout="@layout/splash_fragment" >
-        <action
-            android:id="@+id/action_splashFragment_to_tasksFragment"
-            app:destination="@id/tasksFragment" />
-    </fragment>
+    app:startDestination="@id/tasksFragment">
     <fragment
         android:id="@+id/tasksFragment"
         android:name="com.pamarcolino.sofie.view.fragments.TasksFragment"
-        android:label="tasks_fragment"
-        tools:layout="@layout/tasks_fragment" >
+        android:label="@string/app_name"
+        tools:layout="@layout/tasks_fragment">
         <action
             android:id="@+id/action_tasksFragment_to_newTaskFragment"
             app:destination="@id/newTaskFragment" />

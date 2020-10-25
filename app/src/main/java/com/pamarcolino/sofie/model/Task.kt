@@ -1,5 +1,6 @@
 package com.pamarcolino.sofie.model
 
+import java.io.Serializable
 import java.util.*
 
 class Task(
@@ -8,4 +9,4 @@ class Task(
     val email: String,
     val date: String,
     val title: String
-)
+) : Serializable

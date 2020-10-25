@@ -6,22 +6,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import com.pamarcolino.sofie.R
+import com.pamarcolino.sofie.databinding.TasksFragmentBinding
 import com.pamarcolino.sofie.viewmodel.TasksViewModel
 
 class TasksFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = TasksFragment()
-    }
-
+    private lateinit var binding: TasksFragmentBinding
     private lateinit var viewModel: TasksViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.tasks_fragment, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.tasks_fragment, container, false)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
