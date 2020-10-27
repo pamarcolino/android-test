@@ -12,8 +12,15 @@ data class TaskDTO(
 )
 
 fun TaskDTO.parseToModel() = Task(
-    id,
-    description,
-    email,
-    title
+    _id = id,
+    _description = description,
+    _email = email,
+    _title = title
+)
+
+fun Task.parseToDTO() = TaskDTO(
+    id = id,
+    description = description,
+    email = email,
+    title = title
 )

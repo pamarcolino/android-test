@@ -2,8 +2,16 @@
     <string name="app_name">Sofie</string>
     <string name="lbl_tasks">Tasks</string>
     <string name="lbl_error">Error</string>
-    <string name="lbl_ok">Ok</string>
+    <string name="lbl_ok" translatable="false">Ok</string>
     <string name="lbl_error_on_receive_data">Error on receive data</string>
     <string name="lbl_new_task">New Task</string>
     <string name="lbl_email_desc">email:</string>
+    <string name="lbl_email">Email</string>
+    <string name="lbl_name_task">Name Task</string>
+    <string name="lbl_description_task">Description Task</string>
+    <string name="lbl_save">Save</string>
+    <string name="required_field">Required field</string>
+    <string name="invalid_email">Invalid email</string>
+    <string name="lbl_error_on_save">Error on save</string>
+    <string name="lbl_task_save_successfull">Task save successfull</string>
 </resources>

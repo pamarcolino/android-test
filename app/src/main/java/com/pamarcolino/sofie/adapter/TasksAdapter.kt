@@ -10,7 +10,7 @@ import com.pamarcolino.sofie.R
 import com.pamarcolino.sofie.databinding.TaskCardBinding
 import com.pamarcolino.sofie.model.Task
 
-class TasksAdapter(private val tasks: List<Task>
+class TasksAdapter(private val tasks: List<Task>, val onClick: (Task) -> Unit
 ) : RecyclerView.Adapter<TasksAdapter.ViewHolder>() {
 
     private lateinit var binding: TaskCardBinding
@@ -23,7 +23,7 @@ class TasksAdapter(private val tasks: List<Task>
             false
         )
 
-        return ViewHolder(binding)
+        return ViewHolder(binding, onClick)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -32,9 +32,13 @@ class TasksAdapter(private val tasks: List<Task>
 
     override fun getItemCount() = tasks.count()
 
-    class ViewHolder(private val binding: TaskCardBinding): RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: TaskCardBinding, val onClick: (Task) -> Unit): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(task: Task) {
+            binding.root.setOnClickListener {
+                onClick(task)
+            }
+
             binding.task = task
         }
 

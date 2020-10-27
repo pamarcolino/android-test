@@ -19,5 +19,5 @@ interface ServiceData {
     fun updateTask(@Path("id") id: UUID, @Body task: TaskDTO) : Observable<SaveTaskResponse>
 
     @DELETE("task/{id}")
-    fun putSolicitacaoDetalhe(@Path("id") id: UUID, @Body task: TaskDTO) : Observable<SaveTaskResponse>
+    fun delete(@Path("id") id: UUID, @Body task: TaskDTO) : Observable<SaveTaskResponse>
 }

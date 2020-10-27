@@ -16,6 +16,12 @@
     <fragment
         android:id="@+id/newTaskFragment"
         android:name="com.pamarcolino.sofie.view.fragments.NewTaskFragment"
-        android:label="new_taskragment_fragment"
-        tools:layout="@layout/new_taskragment_fragment" />
+        android:label="@string/lbl_new_task"
+        tools:layout="@layout/new_task_fragment" >
+        <argument
+            android:name="task"
+            app:argType="com.pamarcolino.sofie.model.Task"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 </navigation>

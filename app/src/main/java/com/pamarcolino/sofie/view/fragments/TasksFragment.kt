@@ -1,11 +1,12 @@
 package com.pamarcolino.sofie.view.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
@@ -15,9 +16,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pamarcolino.sofie.R
 import com.pamarcolino.sofie.adapter.TasksAdapter
 import com.pamarcolino.sofie.databinding.TasksFragmentBinding
-import com.pamarcolino.sofie.util.StateView
 import com.pamarcolino.sofie.model.Task
 import com.pamarcolino.sofie.util.AlertDialogUtil
+import com.pamarcolino.sofie.util.StateView
 import com.pamarcolino.sofie.viewmodel.TasksViewModel
 
 class TasksFragment : Fragment() {
@@ -50,7 +51,13 @@ class TasksFragment : Fragment() {
             findNavController().navigate(R.id.newTaskFragment)
         }
 
-        binding.rvTasks.adapter = TasksAdapter(viewModel.tasks)
+        val adapter = TasksAdapter(viewModel.tasks){ task ->
+            val bundle = Bundle()
+            bundle.putParcelable("task", task)
+            findNavController().navigate(R.id.newTaskFragment, bundle)
+        }
+
+        binding.rvTasks.adapter = adapter
         binding.rvTasks.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         binding.rvTasks.addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
 

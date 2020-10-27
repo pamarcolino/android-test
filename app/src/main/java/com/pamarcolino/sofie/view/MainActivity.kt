@@ -26,11 +26,7 @@ class MainActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar)
         navController = findNavController(R.id.nav_host_fragment)
 
-        tasks = intent.getParcelableArrayListExtra(TasksFragment.TASKS_KEY)
-
         setupNavigation()
-
-
     }
 
     private fun setupNavigation() {

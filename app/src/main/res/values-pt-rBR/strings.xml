@@ -2,8 +2,16 @@
 <resources>
     <string name="app_name">Sofie</string>
     <string name="lbl_tasks">Tarefas</string>
-    <string name="lbl_error">Error</string>
-    <string name="lbl_ok">Ok</string>
-    <string name="lbl_error_on_receive_data">Error on receive data</string>
-    <string name="lbl_email_desc">Email:</string>
+    <string name="lbl_error">Erro</string>
+    <string name="lbl_error_on_receive_data">Erro ao receber dados</string>
+    <string name="lbl_email_desc">email:</string>
+    <string name="lbl_new_task">Nova tarefa</string>
+    <string name="lbl_email">Email</string>
+    <string name="lbl_name_task">Nome da Tarefa</string>
+    <string name="lbl_description_task">Descrição da Tarefa</string>
+    <string name="lbl_save">Salvar</string>
+    <string name="invalid_email">Email inválido</string>
+    <string name="required_field">Campo obrigatório</string>
+    <string name="lbl_error_on_save">Erro ao salvar</string>
+    <string name="lbl_task_save_successfull">Tarefa salva com sucesso</string>
 </resources>
