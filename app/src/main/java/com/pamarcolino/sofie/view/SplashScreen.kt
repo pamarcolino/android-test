@@ -3,8 +3,13 @@ package com.pamarcolino.sofie.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import com.pamarcolino.sofie.R
+import com.pamarcolino.sofie.model.Task
+import com.pamarcolino.sofie.network.ServiceApi
+import com.pamarcolino.sofie.view.fragments.TasksFragment
 import io.reactivex.Completable
+import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -19,25 +24,14 @@ class SplashScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
-        compositeDisposable.add(
-            Completable.timer(3, TimeUnit.SECONDS)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    val intent = Intent(this, MainActivity::class.java)
-                    this.startActivity(intent)
-
-                    compositeDisposable.clear()
-
-                    this.finish()
-
-
-                }
-        )
+        compositeDisposable.add(Observable.timer(1, TimeUnit.SECONDS)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                val intent = Intent(this, MainActivity::class.java)
+                this.startActivity(intent)
+            })
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        compositeDisposable.clear()
-    }
+
 }

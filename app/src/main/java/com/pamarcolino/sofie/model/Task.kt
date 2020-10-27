@@ -1,12 +1,13 @@
 package com.pamarcolino.sofie.model
 
-import java.io.Serializable
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
+@Parcelize
 class Task(
     val id: UUID,
     val description: String,
     val email: String,
-    val date: String,
     val title: String
-) : Serializable
+) : Parcelable

@@ -15,14 +15,14 @@ class ServiceApi {
 
         private val BASE_URL = "https://9g1borgfz0.execute-api.sa-east-1.amazonaws.com/beta/"
 
-        private fun provideRetrofit(baseUrl: String): Retrofit {
+        private fun provideRetrofit(): Retrofit {
             return Retrofit.Builder()
-                .baseUrl(baseUrl)
+                .baseUrl(BASE_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
         }
 
-        fun dataService() = provideRetrofit(BASE_URL).create(ServiceData::class.java)
+        fun dataService() = provideRetrofit().create(ServiceData::class.java)
     }
 }

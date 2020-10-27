@@ -1,20 +1,33 @@
 package com.pamarcolino.sofie.view.fragments
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.pamarcolino.sofie.R
+import com.pamarcolino.sofie.adapter.TasksAdapter
 import com.pamarcolino.sofie.databinding.TasksFragmentBinding
+import com.pamarcolino.sofie.util.StateView
+import com.pamarcolino.sofie.model.Task
+import com.pamarcolino.sofie.util.AlertDialogUtil
 import com.pamarcolino.sofie.viewmodel.TasksViewModel
 
 class TasksFragment : Fragment() {
 
     private lateinit var binding: TasksFragmentBinding
-    private lateinit var viewModel: TasksViewModel
+    private val viewModel by lazy {
+        ViewModelProvider(this).get(TasksViewModel::class.java)
+    }
+
+    private var tasks: ArrayList<Task>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,8 +39,49 @@ class TasksFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(TasksViewModel::class.java)
-        // TODO: Use the ViewModel
+
+        tasks = arguments?.getParcelableArrayList<Task>(TASKS_KEY)
+        lifecycle.addObserver(viewModel)
+        binding.lifecycleOwner = this
+
+        binding.viewModel = viewModel
+
+        binding.fabNewTask.setOnClickListener {
+            findNavController().navigate(R.id.newTaskFragment)
+        }
+
+        binding.rvTasks.adapter = TasksAdapter(viewModel.tasks)
+        binding.rvTasks.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+        binding.rvTasks.addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
+
+        viewModel.stateView.observe(viewLifecycleOwner) { state ->
+            when(state){
+                StateView.RUNNING -> {
+
+                }
+                StateView.SUCCESS -> {
+                    binding.rvTasks.adapter?.notifyDataSetChanged()
+                }
+                StateView.ERROR -> {
+                    AlertDialogUtil.show(
+                        context = requireContext(),
+                        title = activity?.getString(R.string.lbl_error) ?: "Error",
+                        message = viewModel.getMessageError()){
+                        activity?.finish()
+                    }
+                }
+                else -> { }
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        lifecycle.removeObserver(viewModel)
+    }
+
+    companion object {
+        val TASKS_KEY = "tasks"
     }
 
 }

@@ -2,4 +2,8 @@
 <resources>
     <string name="app_name">Sofie</string>
     <string name="lbl_tasks">Tarefas</string>
+    <string name="lbl_error">Error</string>
+    <string name="lbl_ok">Ok</string>
+    <string name="lbl_error_on_receive_data">Error on receive data</string>
+    <string name="lbl_email_desc">Email:</string>
 </resources>

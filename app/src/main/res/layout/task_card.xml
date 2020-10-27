@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
         <variable
@@ -8,28 +8,47 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/tvTask"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{task.title}"
+            android:textSize="16sp"
+            android:paddingTop="16dp"
+            android:textColor="@color/colorBlackFirst"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Task 1"/>
+            tools:text="Task 1" />
 
         <TextView
-            android:id="@+id/tvEmail"
-            android:layout_width="67dp"
-            android:layout_height="22dp"
-            android:text="@{task.email}"
+            android:id="@+id/tvEmailDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lbl_email_desc"
+            android:textSize="14sp"
+            android:paddingTop="8dp"
+            android:paddingBottom="16dp"
+            android:textColor="@color/colorBlackSecondary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTask"
             tools:text="email"/>
+
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{task.email}"
+            android:textSize="14sp"
+            android:paddingTop="8dp"
+            android:paddingBottom="16dp"
+            android:textColor="@color/colorBlackSecondary"
+            app:layout_constraintStart_toEndOf="@+id/tvEmailDesc"
+            app:layout_constraintTop_toBottomOf="@+id/tvTask"
+            tools:text="email" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
