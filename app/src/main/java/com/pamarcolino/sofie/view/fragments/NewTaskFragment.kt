@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.util.Log
 import android.view.*
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
@@ -45,7 +46,10 @@ class NewTaskFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.menuSave -> viewModel.save()
+            R.id.menuSave -> {
+                if (validateFields())
+                    viewModel.save()
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -95,49 +99,77 @@ class NewTaskFragment : Fragment() {
 
         binding.edtEmail.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
+                validateEmail()
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if(TextUtils.isEmpty(s)){
-                    binding.tilEmail.error = getString(R.string.required_field)
-                    return
-                }
-                else
-                    binding.tilEmail.error = null
-
-                binding.tilEmail.error = if (!android.util.Patterns.EMAIL_ADDRESS.matcher(s).matches())
-                    getString(R.string.invalid_email)
-                else
-                    null
             }
         })
 
         binding.edtDescription.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
+                validateDescription()
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                binding.tilDescription.error = if(TextUtils.isEmpty(s)) getString(R.string.required_field) else null
             }
         })
 
         binding.edtTitle.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
+                validateTitle()
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                binding.tilTitle.error = if(TextUtils.isEmpty(s)) getString(R.string.required_field) else null
+
             }
         })
+
+
+    }
+
+    private fun validateEmail(): Boolean {
+        if(TextUtils.isEmpty(viewModel.task.email)){
+            binding.tilEmail.error = getString(R.string.required_field)
+            return false
+        }
+        else
+            binding.tilEmail.error = null
+
+        binding.tilEmail.error = if (!android.util.Patterns.EMAIL_ADDRESS.matcher(viewModel.task.email).matches())
+            getString(R.string.invalid_email)
+        else
+            null
+
+        return binding.tilEmail.error == null
+    }
+
+    private fun validateDescription(): Boolean {
+        binding.edtDescription.error = if(TextUtils.isEmpty(viewModel.task.description)) getString(R.string.required_field) else null
+        return binding.edtDescription.error == null
+    }
+
+    private fun validateTitle(): Boolean {
+        binding.tilTitle.error = if(TextUtils.isEmpty(viewModel.task.title)) getString(R.string.required_field) else null
+        return binding.tilTitle.error == null
+    }
+
+    private fun validateFields(): Boolean {
+        val emailValid = validateEmail()
+        val titleValid = validateTitle()
+        val descriptionValid = validateDescription()
+        return emailValid &&
+                titleValid &&
+                descriptionValid
     }
 
     override fun onDestroy() {

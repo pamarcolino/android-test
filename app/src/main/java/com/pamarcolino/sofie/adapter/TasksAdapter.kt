@@ -17,7 +17,7 @@ class TasksAdapter(private val tasks: List<Task>, val onClick: (Task) -> Unit
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         binding = DataBindingUtil.inflate(
-            LayoutInflater.from(parent?.context),
+            LayoutInflater.from(parent.context),
             R.layout.task_card,
             parent,
             false

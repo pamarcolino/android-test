@@ -2,6 +2,7 @@ package com.pamarcolino.sofie.model
 
 import android.os.Parcelable
 import android.text.TextUtils
+import android.util.Log
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import kotlinx.android.parcel.Parcelize
